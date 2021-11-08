@@ -6,7 +6,7 @@ where departmentname='Accounting';
 --question3
 select empid, firstname, lastname, round(salary/12, 2) as "Monthly Salary" from WORKER;
 
---question5 (incomplete)
+--question5
 select firstname, lastname, min(salary) as "SmallestSalary" from WORKER
 group by firstname, lastname;
 
