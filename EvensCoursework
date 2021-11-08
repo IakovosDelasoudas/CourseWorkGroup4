@@ -10,13 +10,13 @@ order by firstname,lastname;
 from project
 where budget = (select max(budget) 
 from project);
-8. select firstname, lastname, rating 
-from worker, assign, project
-where worker.empid=assign.empidand project.projno=assign.projno
-and projmgrId=(select empid from worker
-               where lastname='Burns'
-               and firstname='Michael')
-order by firstname,lastname;
+8.select firstName, lastName, rating from Worker, Assign, project
+where Worker.empid=Assign.empid
+and project.projno=Assign.projno
+and projMgrId=(select empid from worker
+               where lastName='Burns'
+               and firstName='Michael')
+order by firstName,lastName;
 10.
 
 
