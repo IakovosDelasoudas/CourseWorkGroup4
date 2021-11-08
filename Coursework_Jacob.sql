@@ -19,7 +19,7 @@ join PROJECT on assign.projno=project.projno
 where project.projno=1019;
 
 --question9
-create VIEW "Worker Projects" AS
+create VIEW 'WorkerProjects' AS
 SELECT worker.empid, worker.firstname, worker.lastname, project.projno, project.projname
 from WORKER
 join ASSIGN on worker.empid=assign.empid
