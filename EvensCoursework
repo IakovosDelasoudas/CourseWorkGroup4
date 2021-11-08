@@ -1,0 +1,41 @@
+2. select projname
+From project
+Where projname like ‘%urn%’;
+4. select Start_Date, min(End_Date) from
+(select Start_Date from Projects where Start_Date not in (select End_Date from Projects)) as s,
+(select End_Date from Projects where End_Date not in (select Start_Date from Projects)) as e
+where Start_Date < End_Date
+group by Start_Date
+order by datediff(min(End_Date), Start_Date), Start_Date;
+6. select *
+from project
+where budget = (select max(budget) 
+from project);
+8. select firstname, lastname, rating 
+from worker, assign, project
+where worker.empid=assign.empidand project.projno=assign.projno
+and projmgrId=(select empid from worker
+               where lastname='Burns'
+               and firstname='Michael')
+order by firstname,lastname;
+10.
+
+
+12. update Assign
+set hoursassigned = 10
+where empId = 110 and projNo = 1019;
+14. select projno, hoursassigned, count(*) "# of people assigned"
+from assign
+group by projno, hoursassigned;
+16. select projNo, projname, startdate 
+from project 
+where startdate in (select startdate from project group by startdate having count(*) > 1)
+18. select empid,projno 
+from assign 
+where rating is null;
+20. create trigger numemployeesassign on assign
+after insert, delete , update as
+begin
+with values as(select projNo,count(empId) as numemployeesassign from assign group by projno)
+update project set numemployeesassigned = my_values.numemployeesassign from my_values where project.projno = my_values.projno;
+end
